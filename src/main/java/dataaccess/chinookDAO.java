@@ -10,11 +10,11 @@ import java.util.*;
 @Component
 public class chinookDAO {
     @Value("${spring.datasource.url}")
-    private String url = "jdbc:postgresql://localhost:5432/chinook";
+    private String url = "jdbc:postgresql://localhost:5432/ItunesCopy";
     @Value("${spring.datasource.username}")
     private String username = "postgres";
     @Value("${spring.datasource.password}")
-    private String password = "postgres";
+    private String password = "0226";
 
     /*
     public chinookDAO(){
@@ -198,7 +198,31 @@ public class chinookDAO {
         }
         return customers;
     }
-
+    //update customer set first_name = 'banana' where customer_id = 1;
+    public List<Customer> customerUpdate(){
+        String sql = "update customer set first_name = 'banana' where customer_id = 1;";
+        List<Customer>customers = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url,username,password)) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()){
+                Customer customer = new Customer(
+                        result.getInt("customer_id"),
+                        result.getString("first_name"),
+                        result.getString("last_name"),
+                        result.getString("country"),
+                        result.getString("postal_code"),
+                        result.getString("phone"),
+                        result.getString("email")
+                );
+                customers.add(customer);
+                System.out.println(customer);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return customers;
+    }
 
 
 }
