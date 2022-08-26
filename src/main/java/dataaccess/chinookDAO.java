@@ -2,6 +2,7 @@ package dataaccess;
 
 import java.sql.*;
 import dataaccess.models.*;
+import org.postgresql.jdbc.PgConnection;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -58,6 +59,7 @@ public class chinookDAO {
         }
     }
 
+    //RETURN ALL CUSTOMERS
     public List<Customer> getAllCustomers(){
         String sql = "SELECT * FROM customer";
         List<Customer>customers = new ArrayList<>();
@@ -107,6 +109,7 @@ public class chinookDAO {
         return customer;
     }
 
+
     public int insertCustomer(Customer customer){
         String sql = "INSERT INTO customer(customer_id,first_name,last_name,country,postal_code,phone,email) VALUES (?,?,?,?,?,?,?)";
         int result = 0;
@@ -126,6 +129,7 @@ public class chinookDAO {
         return result;
     }
 
+    //RETURN SPECIFIC CUSTOMER BY NAME
     public Customer getCustomerByFirstName(String firstName){
         Customer customer = null;
         try(Connection connection = DriverManager.getConnection(url,username,password)){
@@ -150,6 +154,8 @@ public class chinookDAO {
         return customer;
     }
 
+
+    // LIMIT AND OFFSET SQL
     public Customer getCustomerByLastName(String lastName){
         Customer customer = null;
         try(Connection connection = DriverManager.getConnection(url,username,password)){
@@ -174,6 +180,7 @@ public class chinookDAO {
         return customer;
     }
 
+    //RETURN SPECIFIC CUSTOMER BY NAME
     public List<Customer> sortCustomersByLastName(){
         String sql = "SELECT * FROM customer ORDER BY last_name LIMIT 10 OFFSET 5;";
         List<Customer>customers = new ArrayList<>();
@@ -199,6 +206,25 @@ public class chinookDAO {
         return customers;
     }
 
+
+    public List<CustomerCountry> countryWithMostCustomers(){
+        String sql = "SELECT country, COUNT(*) FROM customer GROUP BY country ORDER BY COUNT(*) DESC LIMIT 1";
+        List<CustomerCountry> customerCountry= new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url,username,password)){
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                CustomerCountry country = new CustomerCountry(
+                        result.getString("country")
+                );
+                customerCountry.add(country);
+                System.out.println("Country with most customers is: " + country);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return customerCountry;
+    }
 
 
 }

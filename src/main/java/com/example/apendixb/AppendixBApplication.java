@@ -19,7 +19,7 @@ public class AppendixBApplication implements ApplicationRunner {
         SpringApplication.run(AppendixBApplication.class, args);
         chinookDAO chinookDAO = new chinookDAO();
 
-        chinookDAO.getAllCustomers();
+        chinookDAO.countryWithMostCustomers();
     }
 
     @Override
