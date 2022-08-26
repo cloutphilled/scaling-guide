@@ -199,7 +199,7 @@ public class chinookDAO {
         return customers;
     }
     //update customer set first_name = 'banana' where customer_id = 1;
-    public List<Customer> customersUpdate(){
+    public List<Customer> customerUpdate(){
         String sql = "update customer set first_name = 'banana' where customer_id = 1;";
         List<Customer>customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url,username,password)) {
