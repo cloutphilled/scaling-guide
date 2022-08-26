@@ -8,7 +8,10 @@ Displaying values from database using JAVA Spring.
 ## Installation 
 
 Clone this repository
+
+```
 $ git clone git@gitlab.com:assigment-2-database/appendix-b.git
+```
 
 ## License
 
