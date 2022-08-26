@@ -24,6 +24,11 @@ Peter Hansen
 
 Version 1 - 29-08-2022
 
+## Challenges
+Easy: pgAdmin database
+Medium: display database values in Java
+Difficult: Gitlab
+
 ## Acknowledgements
 
 Thank you Livinus.
