@@ -6,4 +6,4 @@ insert into customer(customer_id, first_name, last_name, country, postal_code, p
 update customer set first_name = 'banana' where customer_id = 1;
 select max(country) from customer;
 select invoice_id, customer_id, total from invoice where total = (select max(total) from invoice);
-select customer_id, first_name, last_name, country, postal_code, phone, email from customer where exists (select * from invoice where total = (select max(total) from invoice) order by total);
+--select customer_id, first_name, last_name, country, postal_code, phone, email from customer where exists (select * from invoice where total = (select max(total) from invoice) order by total);
