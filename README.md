@@ -38,4 +38,8 @@ Thank you Livinus.
 
 ## Attention
 
-CRUD and comments are uploaded in "AppendixBCRUDrepository"
+The final handin is to be found in "AppendixBCRUDrepository".
+
+## Important learing point
+
+Organizing Gitlab repository in the beginning of the work.
